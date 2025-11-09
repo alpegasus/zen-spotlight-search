@@ -32,6 +32,8 @@ Darken everything behind the floating searchbar with values closer to `0`. The d
 
 How long it takes for the spotlight to transition. The default is `0.2s`.
 
+**Note:** if [`prefers-reduced-motion`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion) is on, the transition will always be `0s`.
+
 ### Apply On Floating Bar
 
 Checkbox to enable/disable spotlight on floating search bar.

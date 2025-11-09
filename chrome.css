@@ -6,37 +6,46 @@
 
 /* ---------- 1) USER PREFERENCES ---------- */
 @layer prefs {
+    /* FETCH PREFS OR DEFAULT */
     :root {
         --splt-blur_radius: var(--mod-alps-spotlight-blur_radius, 6px);
         --splt-brightness: var(--mod-alps-spotlight-brightness, 0.66);
         --splt-transition: var(--mod-alps-spotlight-transition, .20s);
     }
 
-    /* Toggle blur ON if on (independent) */
+    /* BLUR */
+    /* When blur toggle is on, set specified blur radius */
     @media (-moz-bool-pref: "mod.alps.spotlight.enable_blur") {
         :root {
             --splt-blur-active: var(--splt-blur_radius);
         }
     }
-
-    /* Toggle blur OFF if off (independent) */
+    /* When blur toggle is off, set blur radius to 0px */
     @media not (-moz-bool-pref: "mod.alps.spotlight.enable_blur") {
         :root {
             --splt-blur-active: 0px;
         }
     }
 
-    /* Toggle dim ON if turned on (independent) */
+    /* BRIGHTNESS */
+    /* When dim toggle is on, set specified brightness */
     @media (-moz-bool-pref: "mod.alps.spotlight.enable_dim") {
         :root {
             --splt-bright-active: var(--splt-brightness);
         }
     }
-
-    /* Toggle dim OFF if turned off (independent) */
+    /* When dim toggle is off, set brightness to 1.0 */
     @media not (-moz-bool-pref: "mod.alps.spotlight.enable_dim") {
         :root {
             --splt-bright-active: 1;
+        }
+    }
+
+    /*  TRANSITION */
+    /* Respect reduced motion*/
+    @media (prefers-reduced-motion: reduce) {
+        :root {
+            --splt-transition: 0s;
         }
     }
 }
@@ -44,6 +53,7 @@
 /* ---------- 2) ESTABLISH SCOPE  ---------- */
 @layer scope {
 
+    /* ADDRESS BAR */
     /* If user did not pick docked, neutralize when docked */
     @media not (-moz-bool-pref: "mod.alps.spotlight.on_docked") {
         :root:not(:has(#urlbar[open][zen-floating-urlbar="true"])) {
@@ -52,6 +62,7 @@
         }
     }
 
+    /* FLOATING BAR */
     /* If user did not choose floating, neutralize when floating */
     @media not (-moz-bool-pref: "mod.alps.spotlight.on_floating") {
         :root:has(#urlbar[open][zen-floating-urlbar="true"]) {
@@ -70,17 +81,10 @@
         transition: filter var(--splt-transition) ease;
     }
 
-    /* Keep the bar crisp */
+    /* Keep the bar above the blur/darken filter */
     #urlbar[open] {
         position: relative;
         z-index: 9999;
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-        :root:has(#urlbar[open]) #tabbrowser-tabpanels {
-            transition: none !important;
-        }
     }
 }
 
