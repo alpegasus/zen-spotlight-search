@@ -1,6 +1,6 @@
 # <p align="center"><b>zen spotlight search</b></p>
 
-<p align="center">Blur and/or darken pages while you search in Zen browser.</p>
+<p align="center">Blur and/or darken pages behind your search bar for a more focused experience in Zen browser.</p>
 
 <p align="center">
 <img src="screenshots/floating-blur&darkened-spotlight.png" alt="dark & blurred" width="600"/>
